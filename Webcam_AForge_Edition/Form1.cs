@@ -116,6 +116,7 @@ namespace Webcam_AForge_Edition
 
                 buttonCamStart.Enabled = false;
                 buttonStop.Enabled = true;
+                // kommentar
             }
         }
 
