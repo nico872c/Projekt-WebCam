@@ -38,6 +38,9 @@
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonStop = new System.Windows.Forms.Button();
+            this.btn_R = new System.Windows.Forms.Button();
+            this.btn_G = new System.Windows.Forms.Button();
+            this.btn_B = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -97,10 +100,10 @@
             // 
             // buttonGray
             // 
-            this.buttonGray.Location = new System.Drawing.Point(218, 412);
+            this.buttonGray.Location = new System.Drawing.Point(208, 413);
             this.buttonGray.Name = "buttonGray";
             this.buttonGray.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.buttonGray.Size = new System.Drawing.Size(75, 23);
+            this.buttonGray.Size = new System.Drawing.Size(72, 20);
             this.buttonGray.TabIndex = 8;
             this.buttonGray.Text = "Gray scale";
             this.buttonGray.UseVisualStyleBackColor = true;
@@ -143,11 +146,47 @@
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
+            // btn_R
+            // 
+            this.btn_R.Location = new System.Drawing.Point(286, 413);
+            this.btn_R.Name = "btn_R";
+            this.btn_R.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_R.Size = new System.Drawing.Size(30, 20);
+            this.btn_R.TabIndex = 12;
+            this.btn_R.Text = "R";
+            this.btn_R.UseVisualStyleBackColor = true;
+            this.btn_R.Click += new System.EventHandler(this.RGB_change);
+            // 
+            // btn_G
+            // 
+            this.btn_G.Location = new System.Drawing.Point(321, 413);
+            this.btn_G.Name = "btn_G";
+            this.btn_G.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_G.Size = new System.Drawing.Size(30, 20);
+            this.btn_G.TabIndex = 13;
+            this.btn_G.Text = "G";
+            this.btn_G.UseVisualStyleBackColor = true;
+            this.btn_G.Click += new System.EventHandler(this.RGB_change);
+            // 
+            // btn_B
+            // 
+            this.btn_B.Location = new System.Drawing.Point(357, 413);
+            this.btn_B.Name = "btn_B";
+            this.btn_B.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_B.Size = new System.Drawing.Size(30, 20);
+            this.btn_B.TabIndex = 14;
+            this.btn_B.Text = "B";
+            this.btn_B.UseVisualStyleBackColor = true;
+            this.btn_B.Click += new System.EventHandler(this.RGB_change);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 445);
+            this.Controls.Add(this.btn_B);
+            this.Controls.Add(this.btn_G);
+            this.Controls.Add(this.btn_R);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonGray);
             this.Controls.Add(this.imgCapture);
@@ -183,6 +222,9 @@
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resolutionToolStripMenuItem;
         private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button btn_R;
+        private System.Windows.Forms.Button btn_G;
+        private System.Windows.Forms.Button btn_B;
     }
 }
 

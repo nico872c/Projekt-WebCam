@@ -134,7 +134,7 @@ namespace Webcam_AForge_Edition
             try
             {
                 imageStack.Push(new Bitmap(imgCapture.Image));
-                //  undoToolStripMenuItem.Enabled = true;
+                undoToolStripMenuItem.Enabled = true;
                 Bitmap bt = new Bitmap(imgCapture.Image);
                 for (int y = 0; y < bt.Height; y++)
                 {
@@ -214,6 +214,55 @@ namespace Webcam_AForge_Edition
             gv.FinalVideo = null;
             buttonCamStart.Enabled = true;
             buttonStop.Enabled = false;
+        }
+
+        /**************************************************************************************/
+        //
+        /**************************************************************************************/
+        /// <summary>
+        /// Convert captured picture to red, green or blue scale.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RGB_change(object sender, EventArgs e)
+        {
+            Button B = (Button) sender;
+            int avg = 0;
+
+            try
+            {
+                imageStack.Push(new Bitmap(imgCapture.Image));
+                undoToolStripMenuItem.Enabled = true;
+                Bitmap bt = new Bitmap(imgCapture.Image);
+                for (int y = 0; y < bt.Height; y++)
+                {
+                    for (int x = 0; x < bt.Width; x++)
+                    {
+                        Color c = bt.GetPixel(x, y);
+
+                        switch (B.Text) // Asserts which button (Red, Green or Blue) was pressed
+                        {
+                            case "R":
+                                bt.SetPixel(x, y, Color.FromArgb(avg, 0, 0));
+                                break;
+                            case "G":
+                                bt.SetPixel(x, y, Color.FromArgb(0, avg, 0));
+                                break;
+                            case "B":
+                                bt.SetPixel(x, y, Color.FromArgb(0, 0, avg));
+                                break;
+                        }
+
+                        avg = (c.R + c.G + c.B) / 3;
+                        //bt.SetPixel(x, y, Color.FromArgb(avg, avg, avg));
+                    }
+                }
+                imgCapture.Image = bt;
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You need to capture a picture first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
