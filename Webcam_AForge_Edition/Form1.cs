@@ -264,5 +264,16 @@ namespace Webcam_AForge_Edition
                 MessageBox.Show("You need to capture a picture first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void thresholdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 threshold = new Form2((Bitmap)imgVideo.Image);
+            threshold.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
