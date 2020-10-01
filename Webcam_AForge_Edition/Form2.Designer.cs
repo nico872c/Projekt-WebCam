@@ -61,7 +61,7 @@
             this.trackBar1.Location = new System.Drawing.Point(222, 200);
             this.trackBar1.Maximum = 255;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(331, 45);
+            this.trackBar1.Size = new System.Drawing.Size(296, 45);
             this.trackBar1.TabIndex = 2;
             this.trackBar1.TickFrequency = 20;
             // 
@@ -77,7 +77,7 @@
             // 
             this.panel_Histogram.Location = new System.Drawing.Point(222, 12);
             this.panel_Histogram.Name = "panel_Histogram";
-            this.panel_Histogram.Size = new System.Drawing.Size(331, 182);
+            this.panel_Histogram.Size = new System.Drawing.Size(296, 182);
             this.panel_Histogram.TabIndex = 5;
             this.panel_Histogram.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -85,7 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 235);
+            this.ClientSize = new System.Drawing.Size(530, 235);
             this.Controls.Add(this.panel_Histogram);
             this.Controls.Add(this.pb_Image);
             this.Controls.Add(this.trackBar1);

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using AForge.Imaging.Filters;
 
 namespace Webcam_AForge_Edition
 {
@@ -23,7 +24,7 @@ namespace Webcam_AForge_Edition
         {
             InitializeComponent();
             buttonCamStart.Enabled = false;
-            gv = new GlobalVars(); // 'Initialize' Global variable
+            gv = new GlobalVars(); // 'Initiate' Global variable
         }
 
         /**************************************************************************************/
@@ -74,9 +75,7 @@ namespace Webcam_AForge_Edition
         {
             Bitmap video = (Bitmap)eventArgs.Frame.Clone(); // (Bitmap) = 'typecast'
             imgVideo.Image = video;
-
         }
-
         /**************************************************************************************/
         //
         /**************************************************************************************/
@@ -116,7 +115,6 @@ namespace Webcam_AForge_Edition
 
                 buttonCamStart.Enabled = false;
                 buttonStop.Enabled = true;
-                // kommentar
             }
         }
 
@@ -136,6 +134,15 @@ namespace Webcam_AForge_Edition
                 imageStack.Push(new Bitmap(imgCapture.Image));
                 undoToolStripMenuItem.Enabled = true;
                 Bitmap bt = new Bitmap(imgCapture.Image);
+
+                //--------------------AFORGE--------------------
+                // create grayscale filter (BT709)
+                Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+                // apply the filter
+                Bitmap grayImage = filter.Apply(bt);
+                // ---------------------------------------------
+
+                /*
                 for (int y = 0; y < bt.Height; y++)
                 {
                     for (int x = 0; x < bt.Width; x++)
@@ -145,8 +152,9 @@ namespace Webcam_AForge_Edition
                         int avg = (c.R + c.G + c.B) / 3;
                         bt.SetPixel(x, y, Color.FromArgb(avg, avg, avg));
                     }
-                }
-                imgCapture.Image = bt;
+                }*/
+
+                imgCapture.Image = grayImage;
             }
             catch (NullReferenceException)
             {
@@ -226,7 +234,7 @@ namespace Webcam_AForge_Edition
         /// <param name="e"></param>
         private void RGB_change(object sender, EventArgs e)
         {
-            Button B = (Button) sender;
+            Button B = (Button)sender;
             int avg = 0;
 
             try
@@ -234,6 +242,7 @@ namespace Webcam_AForge_Edition
                 imageStack.Push(new Bitmap(imgCapture.Image));
                 undoToolStripMenuItem.Enabled = true;
                 Bitmap bt = new Bitmap(imgCapture.Image);
+
                 for (int y = 0; y < bt.Height; y++)
                 {
                     for (int x = 0; x < bt.Width; x++)
@@ -265,15 +274,35 @@ namespace Webcam_AForge_Edition
             }
         }
 
-        private void thresholdToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form2 threshold = new Form2((Bitmap)imgVideo.Image);
-            threshold.ShowDialog();
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void histogramColor(object sender, EventArgs e)
+        {
+            ToolStripMenuItem C = (ToolStripMenuItem)sender;
+            string colourScale = string.Empty;
+
+            switch (C.Name) // Asserts which button (Red, Green or Blue) was pressed
+            {
+                case "redToolStripMenuItem":
+                    colourScale = "red";
+                    break;
+                case "greenToolStripMenuItem":
+                    colourScale = "green";
+                    break;
+                case "blueToolStripMenuItem":
+                    colourScale = "blue";
+                    break;
+                case "grayToolStripMenuItem":
+                    colourScale = "gray";
+                    break;
+                default:
+                    break;
+            }
+            Form2 threshold = new Form2(imgCapture.Image, colourScale);
+            threshold.ShowDialog();
         }
     }
 }
