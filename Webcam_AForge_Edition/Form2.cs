@@ -26,12 +26,18 @@ namespace Webcam_AForge_Edition
 
         Graphics g = null;
 
-        public Form2(System.Drawing.Image imgCapture, string colourScale)
+        public Form2(System.Drawing.Image imgVideo, string colourScale)
         {
             InitializeComponent();
-            pb_Image.Image = imgCapture;
-            imgLocal = (Bitmap)imgCapture;
+            pb_Image.SizeMode = PictureBoxSizeMode.Normal;
+            pb_Image.Image = imgVideo;
+            imgLocal = (Bitmap)imgVideo;
             colour = colourScale;
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -44,25 +50,20 @@ namespace Webcam_AForge_Edition
         {
             ImageStatistics stat = new ImageStatistics(imgLocal);
             Histogram histogram = new Histogram(new int[256]);
-            Pen myPen = new Pen(new SolidBrush(Color.Black), Xcord);
 
             switch (colour)
             {
                 case "red":
                     histogram = stat.Red;
-                    myPen = new Pen(new SolidBrush(Color.Red), Xcord);
                     break;
                 case "green":
                     histogram = stat.Green;
-                    myPen = new Pen(new SolidBrush(Color.Green), Xcord);
                     break;
                 case "blue":
                     histogram = stat.Blue;
-                    myPen = new Pen(new SolidBrush(Color.Blue), Xcord);
                     break;
                 case "gray":
                     histogram = stat.Gray;
-                    myPen = new Pen(new SolidBrush(Color.Black), Xcord);
                     break;
                 default:
                     break;
@@ -70,6 +71,8 @@ namespace Webcam_AForge_Edition
 
             Ycord = (float)(panel_Histogram.Height - (2 * offset)) / histogram.Values.Max();
             Xcord = (float)(panel_Histogram.Width - (2 * offset)) / (histogram.Values.Length - 1);
+
+            Pen myPen = new Pen(new SolidBrush(Color.Black), Xcord);
 
             for (int i = 0; i < histogram.Values.Length; i++)
             {
