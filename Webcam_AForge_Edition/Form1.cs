@@ -91,6 +91,23 @@ namespace Webcam_AForge_Edition
             }
         }
 
+
+        /**************************************************************************************/
+        //
+        /**************************************************************************************/
+        private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            while (imageStack.Count > 1)
+                imageStack.Pop();
+
+            if (imageStack.Count >= 1)
+                imgCapture.Image = imageStack.Pop();
+
+
+        }
+
+        // Imagestack.pop will be able to remove the changes to revert back to the very first picture captured
+
         /**************************************************************************************/
         //
         /**************************************************************************************/
@@ -241,6 +258,7 @@ namespace Webcam_AForge_Edition
             {
                 imageStack.Push(new Bitmap(imgCapture.Image));
                 undoToolStripMenuItem.Enabled = true;
+                clearToolStripMenuItem.Enabled = true;
                 Bitmap bt = new Bitmap(imgCapture.Image);
 
                 for (int y = 0; y < bt.Height; y++)
@@ -304,5 +322,7 @@ namespace Webcam_AForge_Edition
             Form2 threshold = new Form2(imgCapture.Image, colourScale);
             threshold.ShowDialog();
         }
+
+
     }
 }
